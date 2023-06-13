@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/uguremirmustafa/go-gin-jwt/controllers"
 	"github.com/uguremirmustafa/go-gin-jwt/initializers"
+	"github.com/uguremirmustafa/go-gin-jwt/middlewares"
 )
 
 func init() {
@@ -19,6 +21,10 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	r.POST("/signup", controllers.Singup)
+	r.POST("/login", controllers.Login)
+	r.GET("/validate", middlewares.RequireAuth, controllers.Validate)
 
 	r.Run()
 }
